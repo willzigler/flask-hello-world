@@ -6,7 +6,8 @@ from sqlalchemy.ext.automap import automap_base
 
 Base = automap_base()
 
-engine = create_engine(os.getenv('DATABASE_URI_E'))
+# engine = create_engine(os.getenv('DATABASE_URI_E'))
+engine = create_engine(os.getenv('DATABASE_URI'))
 
 Base.prepare(engine, reflect=True)
 
