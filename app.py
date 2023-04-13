@@ -10,8 +10,9 @@ engine = create_engine(os.getenv('DATABASE_URI_E'))
 
 Base.prepare(engine, reflect=True)
 
-
 Test = Base.classes.test
+
+session = Session(engine)
 
 app = Flask(__name__)
 
@@ -22,6 +23,6 @@ def hello_world():
 @app.route('/api')
 def test():
     cols = ['id', 'val']
-    data = Test.query.all()
+    data = session.query(Test).all()
     result = [{col: getattr(d, col) for col in cols} for d in data]
     return jsonify(result=result)
